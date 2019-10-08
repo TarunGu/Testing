@@ -1,5 +1,17 @@
-# Testing
-This is for testing purpose
- 
-Here i just want to do some testings and make sure that everything is working good.
-So i can push my code into master and work on my project.
+trigger:
+  - master
+
+  pool:
+    vmImage: 'Ubuntu-16.04'
+
+  steps:
+    - task: Maven@3
+      inputs:
+        mavenPomFile: 'pom.xml'
+        mavenOptions: '-Xmx3072m'
+        javaHomeOption: 'JDKVersion'
+        jdkVersionOption: '1.8'
+        jdkArchitectureOption: 'x64'
+        publishJUnitResults: false
+        testResultsFiles: '**/surefire-reports/TEST-*.xml'
+        goals: 'package'
